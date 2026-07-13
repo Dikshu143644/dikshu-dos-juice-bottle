@@ -1,0 +1,50 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--surface);
+  transition: opacity 0.3s ease;
+}
+
+.preloader--leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader-cat {
+  width: 180px;
+  height: auto;
+  -webkit-mask-image: radial-gradient(ellipse 58% 58% at 50% 48%, black 42%, transparent 78%);
+  mask-image: radial-gradient(ellipse 58% 58% at 50% 48%, black 42%, transparent 78%);
+  animation: preloader-walk 0.7s ease-in-out infinite;
+}
+
+.preloader-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+  opacity: 0.65;
+}
+
+@keyframes preloader-walk {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scaleY(1);
+  }
+  25% {
+    transform: translateY(-7px) rotate(-2.5deg) scaleY(0.98);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg) scaleY(1);
+  }
+  75% {
+    transform: translateY(-7px) rotate(2.5deg) scaleY(0.98);
+  }
+}
