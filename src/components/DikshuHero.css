@@ -1,7 +1,16 @@
 .dikshu-hero {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(var(--flavor-count, 8) * 100vh);
+  overflow: visible;
+  background: #16150f;
+}
+
+.dikshu-hero-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
   background: #16150f;
   isolation: isolate;
@@ -271,8 +280,13 @@
 
 @media (max-width: 860px), (max-height: 560px) {
   .dikshu-hero {
-    min-height: 100vh;
+    min-height: calc(var(--flavor-count, 8) * 100vh);
     padding-bottom: 46px;
+  }
+
+  .dikshu-hero-pin {
+    min-height: 100vh;
+    height: auto;
   }
 
   .dikshu-nav {
