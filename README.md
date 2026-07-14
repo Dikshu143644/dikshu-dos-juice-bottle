@@ -1,16 +1,41 @@
-# React + Vite
+# Dikshu Juice Bottle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dikshu is a fruit-forward juice product website built for DOS. It presents a polished animated carousel of fresh juice flavours with branded product bottles, flavour photography, smooth motion, and responsive layouts for desktop and mobile.
 
-Currently, two official plugins are available:
+## Brand Updates
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Rebuilt the original juice experience around the Dikshu brand.
+- Replaced company and organization references with DOS.
+- Recreated the bottle label artwork as deterministic SVG product images in `public/images/dikshu-products`.
+- Updated the app title, favicon, preloader, package name, and README for the Dikshu brand.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- Framer Motion
+- GSAP ScrollTrigger
+- Lenis smooth scrolling
 
-## Expanding the ESLint configuration
+## Run Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Product Assets
+
+The Dikshu bottle assets are generated from `scripts/generate-dikshu-products.mjs`.
+
+```bash
+npm run assets
+```
+
+That command recreates the eight branded bottle images for Orange, Strawberry, Watermelon, Lemon, Cherry, Blueberry, Mango, and Kiwi.

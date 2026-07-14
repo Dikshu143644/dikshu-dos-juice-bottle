@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Preloader.css'
 
-const CAT_IMG = '/images/preloading/ChatGPT Image Jul 11, 2026, 05_41_46 PM.png'
 const DURATION = 4000
 const FADE = 300
 
@@ -25,8 +24,11 @@ const Preloader = ({ onDone }) => {
 
   return (
     <div className={`preloader${leaving ? ' preloader--leaving' : ''}`}>
-      <img src={CAT_IMG} alt="" className="preloader-cat" />
-      <p className="preloader-text">loading</p>
+      <div className="preloader-mark" aria-hidden="true">
+        <span className="preloader-brand">Dikshu</span>
+        <span className="preloader-company">DOS</span>
+      </div>
+      <p className="preloader-text">loading fresh juice</p>
     </div>
   )
 }

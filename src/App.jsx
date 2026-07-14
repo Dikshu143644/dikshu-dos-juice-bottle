@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import useLenis from './lib/useLenis'
 import Preloader from './components/Preloader'
-import SunvitaHero from './components/SunvitaHero'
+import DikshuHero from './components/DikshuHero'
 
 function App() {
   useLenis()
@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       {loading && <Preloader onDone={() => setLoading(false)} />}
-      <SunvitaHero />
+      <DikshuHero />
     </>
   )
 }

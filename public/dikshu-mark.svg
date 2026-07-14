@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Dikshu by DOS mark</title>
+  <defs>
+    <linearGradient id="dikshu-favicon" x1="20" y1="16" x2="110" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff3b8" />
+      <stop offset="0.55" stop-color="#f49a2f" />
+      <stop offset="1" stop-color="#4f9a58" />
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="56" fill="url(#dikshu-favicon)" />
+  <circle cx="64" cy="64" r="43" fill="none" stroke="#17130f" stroke-opacity="0.28" stroke-width="3" />
+  <text x="64" y="62" text-anchor="middle" font-family="Georgia, serif" font-size="25" font-weight="700" fill="#17130f">Dikshu</text>
+  <text x="64" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="800" letter-spacing="4" fill="#17130f">DOS</text>
+</svg>

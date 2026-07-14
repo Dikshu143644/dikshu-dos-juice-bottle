@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion as Motion, AnimatePresence } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { juices } from '../data/juices'
-import './SunvitaHero.css'
+import './DikshuHero.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -19,24 +19,24 @@ const BOTTLE_VARIANTS = {
   exit: { y: -50, opacity: 0, scale: 0.94, transition: { duration: 0.35, ease: 'easeIn' } },
 }
 
-const SunicaIcon = () => (
+const DikshuMark = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <defs>
-      <linearGradient id="sunvita-spark" x1="0" y1="0" x2="24" y2="24">
-        <stop stopColor="#ffdd8a" />
-        <stop offset="1" stopColor="#d99a3d" />
+      <linearGradient id="dikshu-spark" x1="0" y1="0" x2="24" y2="24">
+        <stop stopColor="#fff1a6" />
+        <stop offset="1" stopColor="#f28c22" />
       </linearGradient>
     </defs>
     <path
       d="M12 2 C13 8 16 11 22 12 C16 13 13 16 12 22 C11 16 8 13 2 12 C8 11 11 8 12 2Z"
-      fill="url(#sunvita-spark)"
+      fill="url(#dikshu-spark)"
     />
   </svg>
 )
 
-const NAV_LINKS = ['Sunvita True Story', 'Product', 'Promotion', 'Store']
+const NAV_LINKS = ['Dikshu Story', 'Flavours', 'Offers', 'DOS Store']
 
-const SunvitaHero = () => {
+const DikshuHero = () => {
   const [index, setIndex] = useState(0)
   const len = juices.length
   const current = juices[index]
@@ -68,23 +68,23 @@ const SunvitaHero = () => {
   }, [])
 
   return (
-    <section className="sunvita-hero" ref={heroRef}>
-      <div className="sunvita-mesh" aria-hidden="true" />
-      <motion.div
-        className="sunvita-tint"
+    <section className="dikshu-hero" ref={heroRef}>
+      <div className="dikshu-mesh" aria-hidden="true" />
+      <Motion.div
+        className="dikshu-tint"
         animate={{ backgroundColor: current.tint }}
         transition={{ duration: 0.7, ease: 'easeInOut' }}
         aria-hidden="true"
       />
 
-      <div className="sunvita-blob" ref={blobRef} aria-hidden="true">
+      <div className="dikshu-blob" ref={blobRef} aria-hidden="true">
         <AnimatePresence>
           {current.bgImage && (
-            <motion.img
+            <Motion.img
               key={current.id}
               src={current.bgImage}
               alt=""
-              className="sunvita-blob-photo"
+              className="dikshu-blob-photo"
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.85 }}
               exit={{ opacity: 0 }}
@@ -94,32 +94,32 @@ const SunvitaHero = () => {
         </AnimatePresence>
       </div>
 
-      <nav className="sunvita-nav">
-        <div className="sunvita-logo">
-          <span>Sunvita</span>
-          <SunicaIcon />
+      <nav className="dikshu-nav">
+        <div className="dikshu-logo">
+          <span>Dikshu</span>
+          <DikshuMark />
         </div>
-        <ul className="sunvita-nav-links">
+        <ul className="dikshu-nav-links">
           {NAV_LINKS.map((label) => (
-            <li key={label} className={label === 'Product' ? 'active' : ''}>
+            <li key={label} className={label === 'Flavours' ? 'active' : ''}>
               {label}
             </li>
           ))}
         </ul>
       </nav>
 
-      <div className="sunvita-side-deco">
-        <span className="sunvita-line sunvita-line--left" aria-hidden="true" />
-        <span className="sunvita-line sunvita-line--right" aria-hidden="true" />
-        <button className="sunvita-next" onClick={next} aria-label="Next flavor">
+      <div className="dikshu-side-deco">
+        <span className="dikshu-line dikshu-line--left" aria-hidden="true" />
+        <span className="dikshu-line dikshu-line--right" aria-hidden="true" />
+        <button className="dikshu-next" onClick={next} aria-label="Next flavour">
           Next
         </button>
       </div>
 
-      <div className="sunvita-bottle-stage" ref={stageRef}>
-        <div className="sunvita-bottle-slot">
+      <div className="dikshu-bottle-stage" ref={stageRef}>
+        <div className="dikshu-bottle-slot">
           <AnimatePresence mode="popLayout">
-            <motion.img
+            <Motion.img
               key={current.id}
               src={current.image}
               alt={current.flavor}
@@ -130,9 +130,9 @@ const SunvitaHero = () => {
             />
           </AnimatePresence>
         </div>
-        <div className="sunvita-bottle-slot">
+        <div className="dikshu-bottle-slot dikshu-bottle-slot--preview">
           <AnimatePresence mode="popLayout">
-            <motion.img
+            <Motion.img
               key={upcoming.id}
               src={upcoming.image}
               alt={upcoming.flavor}
@@ -145,9 +145,9 @@ const SunvitaHero = () => {
         </div>
       </div>
 
-      <div className="sunvita-content">
+      <div className="dikshu-content">
         <AnimatePresence mode="popLayout">
-          <motion.div
+          <Motion.div
             key={current.id}
             variants={TEXT_VARIANTS}
             initial="initial"
@@ -155,17 +155,17 @@ const SunvitaHero = () => {
             exit="exit"
           >
             <h1>
-              Sunvita true JUICE
+              Dikshu true JUICE
               <br />
               {current.flavor}
             </h1>
             <p>{current.description}</p>
-            <button className="sunvita-cta">View Flavour</button>
-          </motion.div>
+            <button className="dikshu-cta">View Flavour</button>
+          </Motion.div>
         </AnimatePresence>
       </div>
     </section>
   )
 }
 
-export default SunvitaHero
+export default DikshuHero

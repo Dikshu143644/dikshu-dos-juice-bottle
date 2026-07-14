@@ -1,10 +1,11 @@
 {
-  "name": "vite-project",
+  "name": "dikshu-juice-bottle",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "assets": "node scripts/generate-dikshu-products.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
