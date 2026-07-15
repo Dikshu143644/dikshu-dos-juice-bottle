@@ -1,13 +1,15 @@
-# Dikshu Juice Bottle
+# Dikshu DOS Juice Bottle
 
-Dikshu is a fruit-forward juice product website built for DOS. It presents a polished animated carousel of fresh juice flavours with branded product bottles, flavour photography, smooth motion, and responsive layouts for desktop and mobile.
+Dikshu is a fruit-forward juice product website built for DOS. It presents a polished animated flavour carousel, supplied Dikshu bottle artwork, scroll-driven flavour changes, glassy bento offers, and a DOS Store product grid.
 
-## Brand Updates
+## What Changed
 
-- Rebuilt the original juice experience around the Dikshu brand.
-- Replaced company and organization references with DOS.
-- Recreated the bottle label artwork as deterministic SVG product images in `public/images/dikshu-products`.
-- Updated the app title, favicon, preloader, package name, and README for the Dikshu brand.
+- Replaced the generated product SVGs with the supplied Dikshu bottle PNGs.
+- Matched each bottle image to the correct fruit: Orange, Strawberry, Watermelon, Lemon, Cherry, Blueberry, Mango, and Kiwi.
+- Added active navigation for Dikshu Story, Flavours, Offers, and DOS Store.
+- Added a spatial liquid-glass UI for the new Story, Offers, and Store sections.
+- Built a bento-style Offers section with sale cards.
+- Built a DOS Store section with fruit bottles, prices, and sale bundles.
 
 ## Tech Stack
 
@@ -32,10 +34,6 @@ npm run build
 
 ## Product Assets
 
-The Dikshu bottle assets are generated from `scripts/generate-dikshu-products.mjs`.
+Final bottle assets live in `public/images/dikshu-bottles`.
 
-```bash
-npm run assets
-```
-
-That command recreates the eight branded bottle images for Orange, Strawberry, Watermelon, Lemon, Cherry, Blueberry, Mango, and Kiwi.
+The source bottle files were supplied as PNGs and cleaned locally so the checkerboard background is transparent in the web experience.

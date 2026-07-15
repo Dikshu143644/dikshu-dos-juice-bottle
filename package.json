@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "assets": "node scripts/generate-dikshu-products.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

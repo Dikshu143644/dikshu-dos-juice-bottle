@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion as Motion, AnimatePresence } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { juices } from '../data/juices'
+import { juices, offers, storeProducts } from '../data/juices'
 import './DikshuHero.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -34,10 +34,22 @@ const DikshuMark = () => (
   </svg>
 )
 
-const NAV_LINKS = ['Dikshu Story', 'Flavours', 'Offers', 'DOS Store']
+const NAV_LINKS = [
+  { label: 'Dikshu Story', target: 'story' },
+  { label: 'Flavours', target: 'flavours' },
+  { label: 'Offers', target: 'offers' },
+  { label: 'DOS Store', target: 'store' },
+]
+
+const STORY_POINTS = [
+  ['Cold-filled', 'Bottled fresh in 300 ml glass for a cleaner fruit finish.'],
+  ['No added sugar', 'The sweetness comes from fruit body, not a heavy syrup profile.'],
+  ['DOS batch care', 'Every flavour is built as a small collection with a clear label system.'],
+]
 
 const DikshuHero = () => {
   const [index, setIndex] = useState(0)
+  const [activeSection, setActiveSection] = useState('flavours')
   const len = juices.length
   const current = juices[index]
   const upcoming = juices[(index + 1) % len]
@@ -54,6 +66,11 @@ const DikshuHero = () => {
   }, [len])
 
   const next = useCallback(() => setFlavorIndex(index + 1), [index, setFlavorIndex])
+
+  const scrollToSection = useCallback((target) => {
+    document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setActiveSection(target)
+  }, [])
 
   // Subtle scroll-driven parallax, powered by the app-wide Lenis smooth
   // scroll feeding GSAP's ScrollTrigger (see lib/useLenis.js).
@@ -88,8 +105,29 @@ const DikshuHero = () => {
     return () => ctx.revert()
   }, [len, setFlavorIndex])
 
+  useEffect(() => {
+    const triggers = gsap.utils.toArray('[data-dikshu-section]').map((section) =>
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 48%',
+        end: 'bottom 48%',
+        onEnter: () => setActiveSection(section.id),
+        onEnterBack: () => setActiveSection(section.id),
+      }),
+    )
+
+    return () => triggers.forEach((trigger) => trigger.kill())
+  }, [])
+
   return (
-    <section className="dikshu-hero" ref={heroRef} style={{ '--flavor-count': len }}>
+    <>
+    <section
+      className="dikshu-hero"
+      id="flavours"
+      data-dikshu-section
+      ref={heroRef}
+      style={{ '--flavor-count': len }}
+    >
       <div className="dikshu-hero-pin">
         <div className="dikshu-mesh" aria-hidden="true" />
         <Motion.div
@@ -122,9 +160,15 @@ const DikshuHero = () => {
             <DikshuMark />
           </div>
           <ul className="dikshu-nav-links">
-            {NAV_LINKS.map((label) => (
-              <li key={label} className={label === 'Flavours' ? 'active' : ''}>
-                {label}
+            {NAV_LINKS.map((item) => (
+              <li key={item.target} className={activeSection === item.target ? 'active' : ''}>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection(item.target)}
+                  aria-current={activeSection === item.target ? 'page' : undefined}
+                >
+                  {item.label}
+                </button>
               </li>
             ))}
           </ul>
@@ -182,12 +226,93 @@ const DikshuHero = () => {
                 {current.flavor}
               </h1>
               <p>{current.description}</p>
-              <button className="dikshu-cta">View Flavour</button>
+              <button className="dikshu-cta" onClick={() => scrollToSection('store')}>
+                View Flavour
+              </button>
             </Motion.div>
           </AnimatePresence>
         </div>
       </div>
     </section>
+    <section className="dikshu-page-section dikshu-story-section" id="story" data-dikshu-section>
+      <div className="dikshu-section-shell dikshu-story-layout">
+        <div className="dikshu-section-copy">
+          <span className="dikshu-kicker">Dikshu Story</span>
+          <h2>Fresh fruit bottles shaped by DOS.</h2>
+          <p>
+            Dikshu is built around bright fruit colour, clean bottle labels, and daily-use 300 ml
+            juices. The collection keeps the product simple: fruit first, no added sugar, and a
+            premium glass-bottle look that feels fresh on the shelf.
+          </p>
+        </div>
+        <div className="dikshu-story-product">
+          <img src={juices[6].image} alt="Dikshu Mango bottle" />
+          <img src={juices[0].image} alt="Dikshu Orange bottle" />
+        </div>
+        <div className="dikshu-story-points">
+          {STORY_POINTS.map(([title, copy]) => (
+            <article className="dikshu-glass-panel" key={title}>
+              <span>{title}</span>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="dikshu-page-section dikshu-offers-section" id="offers" data-dikshu-section>
+      <div className="dikshu-section-shell">
+        <div className="dikshu-section-heading">
+          <span className="dikshu-kicker">Offers</span>
+          <h2>Bento deals for every fruit mood.</h2>
+        </div>
+        <div className="dikshu-bento-grid">
+          {offers.map((offer) => (
+            <article
+              className={`dikshu-offer-card ${offer.layout ? `dikshu-offer-card--${offer.layout}` : ''}`}
+              key={offer.id}
+              style={{ '--card-accent': offer.accent }}
+            >
+              <div>
+                <span>{offer.eyebrow}</span>
+                <h3>{offer.title}</h3>
+                <p>{offer.copy}</p>
+              </div>
+              <strong>{offer.stat}</strong>
+              <img src={offer.image} alt="" aria-hidden="true" />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="dikshu-page-section dikshu-store-section" id="store" data-dikshu-section>
+      <div className="dikshu-section-shell">
+        <div className="dikshu-section-heading">
+          <span className="dikshu-kicker">DOS Store</span>
+          <h2>Fruit bottles ready for sale.</h2>
+        </div>
+        <div className="dikshu-store-grid">
+          {storeProducts.map((juice) => (
+            <article className="dikshu-store-card" key={juice.id} style={{ '--card-accent': juice.accent }}>
+              <div className="dikshu-store-image">
+                <img src={juice.image} alt={`Dikshu ${juice.label} juice bottle`} />
+              </div>
+              <div className="dikshu-store-copy">
+                <span>{juice.benefit}</span>
+                <h3>{juice.label}</h3>
+                <p>{juice.storeCopy}</p>
+                <div className="dikshu-store-row">
+                  <strong>{juice.price}</strong>
+                  <em>{juice.sale}</em>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    </>
   )
 }
 
